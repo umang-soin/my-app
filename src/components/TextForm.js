@@ -6,6 +6,7 @@ export default function TextForm(props) {
         // console.log("Upper Case was clicked " + text);
         let newText = text.toUpperCase();
         setText(newText);
+        props.showAlert("Converted to Upper Case","primary")
     }
 
     const handleLoClick = () => {
@@ -59,9 +60,9 @@ const handleExtraSpacesClick = () => {
   return (  
     <>
     <div className="container">  
-        <h1>{props.heading} </h1>
+        <h1>{props.heading}</h1>
         <div className="mb-3">
-        <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+        <textarea className="form-control" style={{backgroundColor: props.mode==='dark'?'grey':'white', color: props.mode==='light'?'grey':'white'}} value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
         <button className="btn btn-primary m-2" onClick={handleUpClick}>Convert to Upper Case</button>
         <button className="btn btn-primary m-2" onClick={handleLoClick}>Convert to Lower Case</button>
         <button className="btn btn-primary m-2" onClick={handleCopyClick}>Copy Text</button>
@@ -75,7 +76,7 @@ const handleExtraSpacesClick = () => {
       <p>{text.split(" ").length} words and {text.length} charachters</p>
       <p> Reading time {0.008*text.split(" ").length}</p>
       <h2>Preview</h2>
-     <p>{text}</p> 
+     <p>{text.length > 0 ? text : 'Enter your text in textbox to Preview'}</p> 
     </div>
     </>
   )
