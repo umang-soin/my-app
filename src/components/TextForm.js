@@ -27,13 +27,8 @@ export default function TextForm(props) {
 //     setText(newTextArr.join(" "));
 // }
 
-const handleCopyClick = () => {     
-  console.log("Copying Text");
-  let text  = document.getElementById('myBox');
-  text.select();
-  // text.setSelectionRange(0,9999);
-  navigator.clipboard.writeText(text.value);  
-  document.getSelection().removeAllRanges();
+const handleCopyClick = () => {  
+  navigator.clipboard.writeText(text);    
   props.showAlert("Copied to Clipboard", "success");
 }
 
@@ -78,8 +73,8 @@ const handleExtraSpacesClick = () => {
 
       {/* <p>{text.split(" ").length} words and {text.length} charachters</p> */}
 
-      <p>{text.split(" ").filter((element) => {return element.length > 0}).length} words and {text.length} charachters</p>
-      <p> Reading time {0.008 * text.split(" ").filter((element) => {return element.length > 0}).length}</p>
+      <p>{text.split(/\s+/).filter((element) => {return element.length > 0}).length} words and {text.length} charachters</p>
+      <p> Reading time {0.008 * text.split(/\s+/).filter((element) => {return element.length > 0}).length}</p>
       <h2>Preview</h2>
      <p>{text.length > 0 ? text : 'Enter your text in textbox to Preview'}</p> 
     </div>
